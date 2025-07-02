@@ -45,7 +45,7 @@ const SignUp = () => {
                 <h1>Sign In</h1>
                 <input ref={emailRef} type="email" placeholder='Email Address' />
                 <input ref={passwordRef} type="password" placeholder='Password' />
-                <button type='submit' onClick={signIn}>Sign In</button>
+                <button onClick={signIn}>Sign In</button>
 
                 <h4><span className='signUpScreen__gray'>New to Netflix? </span><span className='signUpScreen__link' onClick={register}>Sign Up Now.</span></h4>
             </form>
