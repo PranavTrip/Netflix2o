@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import NetflixLogo from '../../assets/NetflixLogo.png'
 import './Login.css'
-import SignUp from '../SignUp/SIgnUp';
+import SignUp from '../SignUp/SignUp';
 
 
 const Login = () => {
