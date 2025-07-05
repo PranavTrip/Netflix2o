@@ -1,54 +1,80 @@
-# React + TypeScript + Vite
+# Netflix2o 🎬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Check it Out! [Netflix2o](https://netflix2o-14982.web.app/)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A modern Netflix clone built with React, Firebase, and Stripe. Users can sign up, log in, subscribe to different plans, and stream content (mock UI) based on their subscription.
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔐 **User Authentication** (Firebase Auth)
+- 💳 **Subscription Plans** with **Stripe**
+- 🔥 **Real-time Firestore Integration**
+- 🧾 View and manage **active subscriptions**
+- ⚡ Responsive UI with dynamic plan selection
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🖥️ Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **React** (Frontend)
+- **Firebase** (Authentication + Firestore)
+- **Stripe** (Payment gateway)
+- **Redux** (State management)
+- **React Router** (Routing)
+- **TypeScript** (Static typing)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Installation
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/PranavTrip/Netflix2o.git
+   cd Netflix2o
+
+2. **Install Dependencies**
+    ```bash
+    npm install
+
+## 🔧 Set up Firebase
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+
+2. Create a new project
+
+3. Enable **Email/Password Authentication** in the **Authentication** section
+
+4. Create a **Firestore Database**
+
+5. Set the following **Firestore security rules**:
+
+   ```js
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /customers/{userId} {
+         allow read, write: if request.auth.uid == userId;
+
+         match /subscriptions/{subId} {
+           allow read: if request.auth.uid == userId;
+         }
+
+         match /checkout_sessions/{sessionId} {
+           allow read, write: if request.auth.uid == userId;
+         }
+       }
+     }
+   }
+
+## 🔧 Set up .env file
+1. Create a .env file in the root of your project and add the following:
+      ```env
+      VITE_FIREBASE_API_KEY=your_key
+      VITE_FIREBASE_AUTH_DOMAIN=your_domain
+      VITE_FIREBASE_PROJECT_ID=your_project_id
+      VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+      VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+      VITE_FIREBASE_APP_ID=your_app_id
+      VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_key
+
+## Start the app
+
+```bash 
+    npm run dev
